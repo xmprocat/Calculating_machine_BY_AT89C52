@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"main.obj" 
+TO "51jsq" 
+RAMSIZE(256) 

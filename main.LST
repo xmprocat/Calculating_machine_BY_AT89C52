@@ -1,0 +1,222 @@
+C51 COMPILER V9.01   MAIN                                                                  01/23/2019 19:33:15 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "reg52.h"       //´ËÎÄ¼şÖĞ¶¨ÒåÁËµ¥Æ¬»úµÄÒ»Ğ©ÌØÊâ¹¦ÄÜ¼Ä´æÆ÷
+   2          void delay(unsigned int n);
+   3          void display(long int number);
+   4          void control();
+   5          unsigned char segs[13] = {0xfc,0x60,0xda,0xf2,0x66,0xb6,0xbe,0xe0,0xfe,0xf6,0x02,0x00,0xde,}; //0,1,2,3,4,
+             -5,6,7,8,9,kong,-
+   6          unsigned char tongd[7] = {0xff,0xfe,0xfd,0xfb,0xf7,0xef,0xdf,};
+   7          long int m,i,z,k=0,amount=0;
+   8          long int temp=0;
+   9          long int g,u=0;
+  10          
+  11          
+  12          
+  13          void main()//Ö÷º¯Êı
+  14          {
+  15   1          m=999;//Õâ¸ö99¿ÉÒÔÈÎÒâÊı£¬Ö»Òª²»ÊÇ0~9Ö®¼äµÄÊı¼´¿É£»
+  16   1          g=0;//ÕâÊÇ¸ø¼ÆËãÆ÷¸³³õÖµ£¬¼´¿ª¼ÆËãÆ÷¾ÍÔÚÊıÂë¹ÜÉÏÏÔÊ¾0£¬ÏÔÊ¾µ÷ÓÃÔÚÏÂÃæ£»
+  17   1          while(1)
+  18   1          {
+  19   2              control();//½øÈëÑ­»·ºóµÚ1¼şÊÂ¾ÍÊÇÒª¼ì²â¼üÅÌµÄÊäÈëÇé¿öÀ²
+  20   2              if(m!=999)//Èç¹û¼üÅÌÉÏÓĞÊı×ÖÊäÈë£¬ÄÇÃ´m¾Í±ØÈ»ÊÇ0~9Ö®¼äµÄÒ»¸öÊıÀ²,Ö´ĞĞº¯ÊıÌå
+  21   2              {
+  22   3                  g = 10*g + m;
+  23   3                  m = 999;//Ò»¶¨Òª¸ø»ØÕâ¸ömÖµ£¬ÒòÎª¼üÅÌÉÏµÄ¼üÖµÒÑ¾­¸³¸øÁËg£¬Èç¹û²»¸ø»ØmÖµ£¬¾Í»áÔì³ÉÕâ¸öifÓï¾äÃ¿´
+             -Î¶¼»á±»Ö´ĞĞ£¬¶ø²»¹ÜÄãÓĞÃ»ÓĞ°´ÏÂ¼üÅÌÀ²
+  24   3              }
+  25   2              if(k==31||k==32||k==33||k==34)//ÔËËã·ûµÄ±êÖ¾Î»
+  26   2              {
+  27   3                  u = k;//Õâ¸ö²»ÄÜÊ¡µôµÄ£¬Ò»¶¨Òª°ÑkÖµ¸³¸øÁíÒ»¸ö±äÁ¿£¬È»ºó°ÑkÇåÁã£¬Èç¹û²»ÇåÁã£¬Õâ¸öifÓï¾äÒ²»áÃ¿´Î
+             -¶¼±»Ö´ĞĞµÄ£¬¶ø²»¹ÜÄãÓĞÃ»ÓĞ°´ÏÂ¼üÅÌ
+  28   3                  temp = g;//°´ÏÂÔËËã·ûºó£¬ÊÇ°Ñ¸Õ²ÅµÄÕâ¸öÊı´æÆğÀ´
+  29   3      
+  30   3                  g=0;//Õâ¸ögÒ²ÒªÇåÁãµÄ£¬·ñÔò¼Ç²»ÁËÄãÒª²Î¼ÓÔËËãµÄµÚ2¸öÊıµÄ£»
+  31   3                  k=0;//ÈçÉÏËùËµ£¬±ØĞëÇåÁã
+  32   3              }
+  33   2              if(amount==30)//ÕâÀï¾ÍÊÇµÈÓÚÀ²¡£
+  34   2              {
+  35   3                  switch(u)
+  36   3                  {
+  37   4                  case 31:
+  38   4                      g=temp + g;
+  39   4                      break;//ÇóºÍ
+  40   4                  case 32:
+  41   4                      g=temp-g;
+  42   4                      break;//Çó²î
+  43   4                  case 33:
+  44   4                      g=temp*g;
+  45   4                      break;//Çó»ı
+  46   4                  case 34:
+  47   4                      g=temp/g;
+  48   4                      break;//ÇóÉÌ
+  49   4                  /*case 35:
+  50   4                      g=pow(temp,g);
+  51   4                      break;//Çón´Î·½
+  52   4                  case 36:
+C51 COMPILER V9.01   MAIN                                                                  01/23/2019 19:33:15 PAGE 2   
+
+  53   4                      g=log10(temp)/log10(g);
+  54   4                      break;//Çó¿ªn´Î·½
+  55   4                      case 37:g=temp*g;break;
+  56   4                      case 38:g=temp/g;break;*/
+  57   4                  }
+  58   3                  u=0;
+  59   3                  amount=0;//ÔËËã½áÊø£¬¶¼ÇåÁã
+  60   3              }
+  61   2              display(g);//ÏÔÊ¾½á¹ûÀ²
+  62   2              if(z==40)
+  63   2                  break;//ËãÍêÁË£¬ÓÃÕâ¸ö¼ü°Ñ¼ÆËãÆ÷¸´Î»
+  64   2          }
+  65   1      }
+  66          
+  67                                          
+  68                  
+  69          void control() {
+  70   1          unsigned char tablelie[]= {0xfe,0xfd,0xfb,0xf7};//4*4¾ØÕó¼üÅÌ£¬½ÓP3¿Ú£»¸ß4Î»ÂÖÁ÷¸øµÍµçÆ½£¬¸ù¾İµÍ4Î»µÄµ
+             -çÆ½±ä»¯È·¶¨°´ÏÂµÄÊÇÄÄ¸ö¼ü£»
+  71   1          for(i=0; i<4; i++) //Õâ¸öÑ­»·ÊÇ¸øP3¿ÚÉÏµÄ¼üÅÌµÄ¸ß4Î»ÂÖÁ÷¸øµÍµçÆ½£»
+  72   1          {
+  73   2      
+  74   2              P3= tablelie[i];
+  75   2              if ((P3 & tablelie[i])!= tablelie[i]) //ÕâÀïÊÇ¼ì²âÊÇ·ñÓĞ¼üÅÌ±»°´ÏÂ£»
+  76   2              {
+  77   3      
+  78   3      
+  79   3                  delay(10);
+  80   3      
+  81   3                  if((P3 & tablelie[i]) != tablelie[i]) //ÕâÀï¾­¹ı10µÄÑÓÊ±ºó£¬¿´Õâ¸ö¼üÊÇ·ñ´¦ÓÚ±»°´ÏÂµÄ×´Ì¬£¬Õâ±ã
+             -ÊÇËùÎ½µÄÈí¼şÏû¶¶£»
+  82   3                  {
+  83   4                      switch (P3)
+  84   4                      {
+  85   5                      case 0xb7:
+  86   5                          m=1;
+  87   5                          break;
+  88   5                      case 0xbb:
+  89   5                          m=2;
+  90   5                          break;
+  91   5                      case 0xbd:
+  92   5                          m=3;
+  93   5                          break;
+  94   5                      case 0x7e:
+  95   5                          k=31;
+  96   5                          break;//ÕâÊÇ¡°¼Ó¡±µÄ±êÖ¾Î»£»
+  97   5                      case 0xd7:
+  98   5                          m=4;
+  99   5                          break;
+ 100   5                      case 0xdb:
+ 101   5                          m=5;
+ 102   5                          break;
+ 103   5                      case 0xdd:
+ 104   5                          m=6;
+ 105   5                          break;
+ 106   5                      case 0xbe:
+ 107   5                          k=32;
+ 108   5                          break;//ÕâÊÇ¡°¼õ¡±µÄ±êÖ¾Î»£»
+ 109   5                      case 0xe7:
+ 110   5                          m=7;
+ 111   5                          break;
+ 112   5                      case 0xeb:
+C51 COMPILER V9.01   MAIN                                                                  01/23/2019 19:33:15 PAGE 3   
+
+ 113   5                          m=8;
+ 114   5                          break;
+ 115   5                      case 0xed:
+ 116   5                          m=9;
+ 117   5                          break;
+ 118   5                      case 0xde:
+ 119   5                          k=33;
+ 120   5                          break;//ÕâÊÇ¡°³Ë¡±µÄ±êÖ¾Î»;
+ 121   5                      case 0x77:
+ 122   5                          z=40;
+ 123   5                          break;//ÕâÊÇ¡°¼ÆËãÆ÷ÇåÁã¡±µÄ±êÖ¾Î»£»
+ 124   5                      case 0x7b:
+ 125   5                          m=0;
+ 126   5                          break;
+ 127   5                      case 0x7d:
+ 128   5                          amount=30;
+ 129   5                          break;//ÕâÊÇ¡°µÈÓÚ¡±µÄ±êÖ¾Î»£»
+ 130   5                      case 0xee:
+ 131   5                          k=34;
+ 132   5                          break;//ÕâÊÇ¡°³ı¡±µÄ±êÖ¾Î»£»
+ 133   5                      }
+ 134   4                  }
+ 135   3                  while((P3 & tablelie[i]) != tablelie[i]);//´«ËµÖĞµÄËÉÊÖ¼ì²â£¬±ØĞëÒªµÄ
+ 136   3              }
+ 137   2          }
+ 138   1      
+ 139   1      }
+ 140          
+ 141          
+ 142           
+ 143          
+ 144            
+ 145          
+ 146          
+ 147          void display(long int number) {
+ 148   1              long int count;
+ 149   1              int cdu,se;
+ 150   1              count = number;
+ 151   1              if(number > 999999 || number < 0 ) {
+ 152   2                 for(se = 6;se > 0;se--) {
+ 153   3                              P2 = tongd[se];
+ 154   3                              P1 = segs[12];                          
+ 155   3                              delay(1);       
+ 156   3                              P1 = segs[11];
+ 157   3                              P2 = tongd[0];
+ 158   3                              delay(1);
+ 159   3                      }
+ 160   2              
+ 161   2              } else if(number <= 999999 && number >= 0) {
+ 162   2                      if(number <= 9 && number >= 0) {cdu=1;}
+ 163   2                      else if (number <= 99 && number >= 10) {cdu=2;} 
+ 164   2                      else if (number <= 999 && number >= 100) {cdu=3;}
+ 165   2                      else if (number <= 9999 && number >= 1000) {cdu=4;}
+ 166   2                      else if (number <= 99999 && number >= 10000) {cdu=5;}
+ 167   2                      else if (number <= 999999 && number >= 100000) {cdu=6;}
+ 168   2                      
+ 169   2                      for(se = 6;se > 6 - cdu;se--) {
+ 170   3                              P2 = tongd[se];
+ 171   3                              P1 = segs[number%10];
+ 172   3                              number/=10;
+ 173   3                                      
+ 174   3                              delay(1);
+C51 COMPILER V9.01   MAIN                                                                  01/23/2019 19:33:15 PAGE 4   
+
+ 175   3              
+ 176   3                              P1 = segs[11];
+ 177   3                              P2 = tongd[0];
+ 178   3                              delay(1);
+ 179   3                      }
+ 180   2                      }
+ 181   1          
+ 182   1      }
+ 183          void delay(unsigned int n) {
+ 184   1        unsigned int i,j;
+ 185   1        for(j=0;i<n;i++) {
+ 186   2              for(j=0;j<123;j++){}
+ 187   2        }
+ 188   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1239    ----
+   CONSTANT SIZE    =      4    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     52      18
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
