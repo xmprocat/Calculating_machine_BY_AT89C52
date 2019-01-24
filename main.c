@@ -1,8 +1,9 @@
 #include "reg52.h"	 //此文件中定义了单片机的一些特殊功能寄存器
+#include "stdlib.h"
 void delay(unsigned int n);//声明函数
 void display(long int number);
 void control();
-unsigned char segs[13] = {0xfc,0x60,0xda,0xf2,0x66,0xb6,0xbe,0xe0,0xfe,0xf6,0x02,0x00,0xde,}; //位选0,1,2,3,4,5,6,7,8,9,kong,-
+unsigned char segs[13] = {0xfc,0x60,0xda,0xf2,0x66,0xb6,0xbe,0xe0,0xfe,0xf6,0x02,0x00,0xde,}; //位选0,1,2,3,4,5,6,7,8,9,kong,-,e
 unsigned char tongd[7] = {0xff,0xfe,0xfd,0xfb,0xf7,0xef,0xdf,};//段选
 long int m,i,z,k=0,amount=0;
 long int temp=0;
@@ -145,37 +146,59 @@ void control() {//键盘扫描读取函数,我键盘接在P3上
 
 
 void display(long int number) { //显示函数，负责显示数字在数码管上面
-	long int count;
+	int fu = 0;
 	int cdu,se;
-	count = number;
-	if(number > 999999 || number < 0 ) { //传入数字的合理性判断
+	long int temp;
+	if(number > 999999 || number < -99999 ) { //传入数字的合理性判断
 	   for(se = 6;se > 0;se--) { //错误处理
 			P2 = tongd[se];
-			P1 = segs[12]; 				
+			P1 = segs[10]; 				
 			delay(1);	
-			P1 = segs[11];
-			P2 = tongd[0];
+			//P1 = segs[11];
+			//P2 = tongd[0];
 			delay(1);
 	  	}
 	
-	} else if(number <= 999999 && number >= 0) { //获取数字的长度，暂时想不出更好的算法
+	} else if(number <= 999999 && number >= -99999) { //获取数字的长度，暂时想不出更好的算法
+		
+		temp = labs(number);
+		
 		if(number <= 9 && number >= 0) {cdu=1;}//这样写是防止数字中间有0
 		else if (number <= 99 && number >= 10) {cdu=2;}	
 		else if (number <= 999 && number >= 100) {cdu=3;}
 		else if (number <= 9999 && number >= 1000) {cdu=4;}
 		else if (number <= 99999 && number >= 10000) {cdu=5;}
 		else if (number <= 999999 && number >= 100000) {cdu=6;}
+
+		else if (number < 0 && number > -10) {cdu=1;P2 = 0xfe;P1 = 0x02;}
+		else if (number <= -10 && number >= -99) {cdu=2;P2 = 0xfe;P1 = 0x02;}	
+		else if (number <= -100 && number >= -999) {cdu=3;P2 = 0xfe;P1 = 0x02;}
+		else if (number <= -1000 && number >= -9999) {cdu=4;P2 = 0xfe;P1 = 0x02;}
+		else if (number <= -10000 && number >= -99999) {cdu=5;P2 = 0xfe;P1 = 0x02;}
 		
-		for(se = 6;se > 6 - cdu;se--) {//刷新显示数码管
-			P2 = tongd[se];//位选
-			P1 = segs[number%10];//段选
-			number/=10;//每次段选取出最后一位，然后除10砍掉最后一位
+		for(se = 6;se > 6 - cdu;se--) {//刷新显示数码管se为当前刷新
+				if(number < 0) {
+				P2 = 0xfe;P1 = 0x02;
+					
+						
+					delay(1);//延时
+			
+					//P1 = segs[11];//清空位选
+					//P2 = tongd[0];//清空段选防止重影
 				
-			delay(1);//延时
-	
-			P1 = segs[11];//清空位选
-			P2 = tongd[0];//清空段选防止重影
-			delay(1);
+				 }
+				 delay(1);//延时
+		
+				P1 = segs[11];//清空
+				P2 = tongd[0];//清空防止重影
+				delay(1);
+				P2 = tongd[se];//位选
+				P1 = segs[temp%10];//段选
+				temp/=10;//每次段选取出最后一位，然后除10砍掉最后一位
+					
+				
+			
+			
 	  	}
 		}
     
