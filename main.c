@@ -67,20 +67,20 @@ void main()//主函数
 				
 	
 void control() {//键盘扫描读取函数,我键盘接在P3上
-    unsigned char tablelie[]= {0xfe,0xfd,0xfb,0xf7};//4*4矩阵键盘，接P3口；高4位轮流给低电平，根据低4位的电平变化确定按下的是哪个键；
+    unsigned char tablelie[]= {0x7f,0xbf,0xdf,0xef};//4*4矩阵键盘，接P3口；高4位轮流给低电平，根据低4位的电平变化确定按下的是哪个键；
     for(i=0; i<4; i++) //这个循环是给P3口上的键盘的高4位轮流给低电平；
     {
 
-        P3= tablelie[i];
-        if ((P3 & tablelie[i])!= tablelie[i]) //这里是检测是否有键盘被按下；
+        P0= tablelie[i];
+        if ((P0 & tablelie[i])!= tablelie[i]) //这里是检测是否有键盘被按下；
         {
 
 
             delay(10);
 
-            if((P3 & tablelie[i]) != tablelie[i]) //这里经过10的延时后，看这个键是否处于被按下的状态，这便是所谓的软件消抖；
+            if((P0 & tablelie[i]) != tablelie[i]) //这里经过10的延时后，看这个键是否处于被按下的状态，这便是所谓的软件消抖；
             {
-                switch (P3)//获取按下的字符
+                switch (P0)//获取按下的字符
                 {
                 case 0xb7://这是按下时的电平情况,可根据Proteus模拟得出
                     m=1;
@@ -132,7 +132,7 @@ void control() {//键盘扫描读取函数,我键盘接在P3上
                     break;//这是“除”的标志位；
                 }
             }
-            while((P3 & tablelie[i]) != tablelie[i]);//传说中的松手检测，必须要的
+            while((P0 & tablelie[i]) != tablelie[i]);//传说中的松手检测，必须要的
         }
     }
 

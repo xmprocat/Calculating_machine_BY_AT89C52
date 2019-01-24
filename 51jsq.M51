@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        01/23/2019  19:33:15  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        01/24/2019  16:19:13  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -59,7 +59,7 @@ SEGMENT                          DATA_GROUP
 
 ?PR?MAIN?MAIN                  -----    -----
   +--> ?PR?CONTROL?MAIN
-BL51 BANKED LINKER/LOCATER V6.22                                                      01/23/2019  19:33:15  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/24/2019  16:19:13  PAGE 2
 
 
   +--> ?PR?_DISPLAY?MAIN
@@ -116,12 +116,13 @@ SYMBOL TABLE OF MODULE:  51jsq (?C_STARTUP)
 
   -------         MODULE        MAIN
   C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/24/2019  16:19:13  PAGE 3
+
+
   D:00B0H         PUBLIC        P3
-BL51 BANKED LINKER/LOCATER V6.22                                                      01/23/2019  19:33:15  PAGE 3
-
-
   C:0604H         PUBLIC        control
   D:00A8H         PUBLIC        IE
   C:0842H         PUBLIC        _delay
@@ -178,10 +179,10 @@ SYMBOL TABLE OF MODULE:  51jsq (?C_STARTUP)
   C:05B3H         LINE#         45
   C:05B5H         LINE#         46
   C:05B5H         LINE#         47
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/24/2019  16:19:13  PAGE 4
+
+
   C:05D0H         LINE#         48
-BL51 BANKED LINKER/LOCATER V6.22                                                      01/23/2019  19:33:15  PAGE 4
-
-
   C:05D0H         LINE#         57
   C:05D0H         LINE#         58
   C:05D9H         LINE#         59
@@ -238,10 +239,10 @@ SYMBOL TABLE OF MODULE:  51jsq (?C_STARTUP)
   C:06D3H         LINE#         114
   C:06D5H         LINE#         115
   C:06D5H         LINE#         116
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/24/2019  16:19:13  PAGE 5
+
+
   C:06D9H         LINE#         117
-BL51 BANKED LINKER/LOCATER V6.22                                                      01/23/2019  19:33:15  PAGE 5
-
-
   C:06DBH         LINE#         118
   C:06DBH         LINE#         119
   C:06DFH         LINE#         120
@@ -298,10 +299,10 @@ SYMBOL TABLE OF MODULE:  51jsq (?C_STARTUP)
   C:045DH         LINE#         177
   C:045DH         LINE#         178
   C:0460H         LINE#         179
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/24/2019  16:19:13  PAGE 6
+
+
   C:046AH         LINE#         180
-BL51 BANKED LINKER/LOCATER V6.22                                                      01/23/2019  19:33:15  PAGE 6
-
-
   C:046AH         LINE#         182
   -------         ENDPROC       _DISPLAY
   C:083EH         SYMBOL        L?0086
