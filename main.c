@@ -92,10 +92,11 @@ void control() {
 	for (i = 0; i < 4; i++) //这个循环是给P3口上的键盘的高4位轮流给低电平
 	{
 		P0 = tablelie[i];
-		if ((P0 & tablelie[i]) != tablelie[i]) //这里是检测是否有键盘被按下
+		if (P0 != tablelie[i]) //这里是检测是否有键盘被按下 跟输出的不一致就是有按键按下
 		{
+
 			delay(10);
-			if ((P0 & tablelie[i]) != tablelie[i]) //这里经过10的延时后，看这个键是否处于被按下的状态	实现软件消抖 
+			if (P0 != tablelie[i]) //这里经过10的延时后，看这个键是否处于被按下的状态	实现软件消抖 
 			{
 				switch (P0)//获取按下的字符
 				{
@@ -149,7 +150,7 @@ void control() {
 					break;//这是"除"的标志位 
 				}
 			}
-			while ((P0 & tablelie[i]) != tablelie[i]);//松手检测，必须要的	用于等待按键松开 如果按键没松开则进程会进行等待
+			while (P0 != tablelie[i]);//松手检测	用于等待按键松开 如果按键没松开则进程会进行等待
 		}
 	}
 }
